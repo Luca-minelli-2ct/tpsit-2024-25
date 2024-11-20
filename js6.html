@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contatore Decrescente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        #countdown {
+            font-size: 50px;
+            font-weight: bold;
+        }
+
+        #image-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Menu */
+        #menu {
+            margin-top: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #menu li {
+            display: inline;
+            margin: 0 15px;
+            font-size: 18px;
+        }
+
+        #menu li a {
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Menu -->
+    <ul id="menu">
+        <li><a href="#">HTML/CSS</a></li>
+        <li><a href="#">JavaScript</a></li>
+    </ul>
+
+    <h1>Contatore Decrescente</h1>
+
+    <!-- Countdown -->
+    <div id="countdown">3</div>
+
+    <!-- Container per immagine -->
+    <div id="image-container">
+        <img src="https://via.placeholder.com/150" alt="Immagine nascosta" />
+    </div>
+
+    <script>
+        let count = 3;
+        const countdownElement = document.getElementById("countdown");
+        const imageContainer = document.getElementById("image-container");
+
+        function updateCountdown() {
+            if (count > 0) {
+                count--;
+                countdownElement.textContent = count;
+            } else {
+                countdownElement.textContent = "0";
+                imageContainer.style.display = "block"; // Mostra l'immagine
+            }
+        }
+
+        setInterval(updateCountdown, 1000); // Aggiorna ogni secondo
+    </script>
+
+</body>
+</html>
