@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gioco Morra Cinese</title>
+    <style>
+        #out2 {
+            font-size: large;
+            color: brown;
+        }
+
+        #punteggio {
+            font-size: large;
+            color: green;
+        }
+
+        img {
+            width: 100px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Gioco della Morra Cinese</h1>
+
+    <p>Benvenuto! Il gioco inizierà appena inserisci il tuo nome.</p>
+    <button onclick="iniziaGioco()">Inizia il Gioco</button>
+
+    <p id="saluto"></p>
+
+    <div id="scelteGioco" style="display: none;">
+        <p>Seleziona una delle opzioni sotto:</p>
+
+        <div>
+            <img src="https://www.filastrocche.it/contenuti/wp-content/uploads/2018/05/sasso.jpg" alt="Sasso" id="sasso">
+            <img src="https://m.media-amazon.com/images/I/61oboqjGMRL._AC_UF1000,1000_QL80_.jpg" alt="Carta" id="carta">
+            <img src="https://master.opitec.com/out/pictures/master/product/1/361496-000-000-VO-02-z.jpg" alt="Forbice" id="forbice">
+        </div>
+
+        <p id="out1"></p>
+        <p id="out2"></p>
+        <p id="punteggio">Punteggio: <span id="score">0</span></p>
+    </div>
+
+    <script>
+        let morra = ["sasso", "carta", "forbice"];
+        let score = 0;
+        let nome = '';
+
+        // Funzione per iniziare il gioco
+        function iniziaGioco() {
+            nome = prompt("Inserisci il tuo nome:");
+            if (nome === null || nome.trim() === "") {
+                alert("Per favore, inserisci il tuo nome.");
+                return;
+            }
+
+            // Mostra il saluto e nasconde la richiesta del nome
+            document.getElementById("saluto").innerText = "Benvenuto, " + nome + "! Inizia a giocare.";
+            document.getElementById("scelteGioco").style.display = "block";
+            document.querySelector("button").style.display = "none";
+        }
+
+        // Funzione per aggiornare il punteggio
+        function aggiornaPunteggio() {
+            document.getElementById("score").innerText = score;
+        }
+
+        // Funzione per determinare il risultato
+        function gioca(utenteScelta) {
+            let numeroCasuale = Math.floor(Math.random() * 3);
+            let botScelta = morra[numeroCasuale];
+
+            // Visualizza le scelte
+            document.getElementById("out1").innerText = nome + " ha scelto: " + utenteScelta;
+            document.getElementById("out2").innerText = "Scelta del bot: " + botScelta;
+
+            // Determina il risultato
+            if (utenteScelta === botScelta) {
+                alert("Pareggio!");
+            } else if (
+                (utenteScelta === "sasso" && botScelta === "forbice") ||
+                (utenteScelta === "carta" && botScelta === "sasso") ||
+                (utenteScelta === "forbice" && botScelta === "carta")
+            ) {
+                score++;
+                alert(nome + " ha vinto!");
+            } else {
+                score--;
+                alert(nome + " ha perso!");
+            }
+
+            // Aggiorna il punteggio
+            aggiornaPunteggio();
+        }
+
+        // Assegna gli eventi di clic alle immagini
+        document.getElementById("sasso").onclick = function() {
+            gioca("sasso");
+        };
+        document.getElementById("carta").onclick = function() {
+            gioca("carta");
+        };
+        document.getElementById("forbice").onclick = function() {
+            gioca("forbice");
+        };
+
+    </script>
+
+</body>
+</html>
