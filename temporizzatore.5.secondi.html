@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temporizzatore Numerico</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #1900ff;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Temporizzatore Numerico</h1>
+    <p>questo programma ha la funzione di generare un numero e tutte le sue caratteristiche ogni 5 secondi:</p>
+    <div id="results"></div>
+
+    <script>
+        function isPrime(n) {
+            if (n <= 1) return false;
+            for (let i = 2; i <= Math.sqrt(n); i++) {
+                if (n % i === 0) return false;
+            }
+            return true;
+        }
+
+        function updateResults() {
+            let n = Math.floor(Math.random() * 1000) + 1; 
+            let resultText = `Numero: ${n}<br>`;
+
+            
+            resultText += n % 2 === 0 ? "Il numero è PARI.<br>" : "Il numero è DISPARI.<br>";
+
+            
+            resultText += isPrime(n) ? "Il numero è PRIMO.<br>" : "Il numero NON è PRIMO.<br>";
+
+            
+            resultText += `Doppio del numero: ${n * 2}<br>`;
+            resultText += `Metà del numero: ${(n / 2).toFixed(2)}<br>`;
+
+            
+            resultText += `Complemento a 1000: ${1000 - n}<br>`;
+
+           
+            resultText += `Somma con il precedente e il successivo: ${n - 1 + n + n + 1}<br>`;
+
+            
+            resultText += `Moltiplicato per 3.14: ${(n * 3.14).toFixed(2)}<br>`;
+
+            
+            document.getElementById('results').innerHTML = resultText;
+        }
+
+        setInterval(updateResults, 5000);
+    </script>
+</body>
+</html>
